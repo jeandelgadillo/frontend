@@ -1,0 +1,177 @@
+/* Importar fuente minimalista y limpia */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    /* Paleta de colores: futurista, apagada y elegante */
+    --bg-color: #0b0f19; /* Fondo azul/gris muy oscuro */
+    --card-bg: rgba(20, 25, 35, 0.6); /* Efecto cristal (Glassmorphism) */
+    --text-main: #94a3b8; /* Texto base apagado (gris azulado) */
+    --text-light: #f1f5f9; /* Texto claro para títulos */
+    --accent-1: #38bdf8; /* Cyan suave */
+    --accent-2: #818cf8; /* Índigo suave */
+    --border-glass: rgba(255, 255, 255, 0.08); /* Borde sutil */
+}
+
+body {
+    background: radial-gradient(circle at 50% 0%, #1e293b 0%, var(--bg-color) 70%);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Animación de flotación suave para la tarjeta */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Contenedor principal con Glassmorphism (Efecto cristal) */
+.contenedor {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 600px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+    text-align: center;
+    animation: float 6s ease-in-out infinite; /* Dinamismo sutil */
+    position: relative;
+    z-index: 1;
+}
+
+/* Resplandor dinámico de fondo para la tarjeta */
+.contenedor::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
+    z-index: -1;
+    border-radius: 22px;
+    filter: blur(20px);
+    opacity: 0.15;
+    transition: opacity 0.5s ease;
+}
+
+.contenedor:hover::before {
+    opacity: 0.25; /* El resplandor aumenta al pasar el cursor */
+}
+
+/* Tipografía */
+h1 {
+    background: linear-gradient(to right, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 0;
+    font-size: 2.2em;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-glass);
+}
+
+h2 {
+    color: var(--text-light);
+    font-size: 1.1em;
+    font-weight: 400;
+    margin-top: 35px;
+    text-align: left;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+p {
+    line-height: 1.7;
+    text-align: justify;
+    font-weight: 300;
+}
+
+/* Estilos de listas */
+ul {
+    text-align: left;
+    line-height: 1.8;
+    padding-left: 20px;
+    font-weight: 300;
+}
+
+li::marker {
+    color: var(--accent-1);
+}
+
+/* Animación de pulso para la foto de perfil */
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.1); }
+    50% { box-shadow: 0 0 25px rgba(129, 140, 248, 0.4); }
+    100% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.1); }
+}
+
+/* Estilo de la imagen de perfil futurista */
+img {
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box, 
+                linear-gradient(45deg, var(--accent-1), var(--accent-2)) border-box;
+    margin: 10px 0 25px 0;
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    animation: pulseGlow 4s infinite alternate; /* Animación activa */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+img:hover {
+    transform: scale(1.08) rotate(2deg); /* Movimiento al interactuar */
+}
+
+/* Botones para los enlaces favoritos (Minimalistas y activos) */
+.enlaces-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.enlaces-grid a {
+    display: block;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-glass);
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: var(--text-light);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Efecto de barrido (sweep) en los botones */
+.enlaces-grid a::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    transition: all 0.5s ease;
+}
+
+.enlaces-grid a:hover::before {
+    left: 100%;
+}
+
+.enlaces-grid a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent-2);
+    transform: translateY(-4px); /* Se levanta un poco */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    color: #ffffff;
+}
